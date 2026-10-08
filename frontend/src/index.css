@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body { @apply bg-ink text-sand font-sans; }
+.btn { @apply rounded px-4 py-2 font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber; }
+.btn-primary { @apply btn bg-amber text-white hover:brightness-110; }
+.btn-ghost { @apply btn border border-line hover:bg-line; }
+.input { @apply w-full rounded border border-line bg-ink px-3 py-2 focus:outline-none focus:border-amber; }

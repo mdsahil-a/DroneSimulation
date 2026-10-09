@@ -1,0 +1,23 @@
+{
+  "features": [
+    "dist_from_centre",
+    "speed",
+    "is_night",
+    "degraded_sensors",
+    "difficulty_enc",
+    "approach_angle_sin",
+    "approach_angle_cos"
+  ],
+  "classes": [
+    "Armed",
+    "Commercial",
+    "Surveillance",
+    "Swarm"
+  ],
+  "model_info": {
+    "classifier": "RandomForestClassifier(n_estimators=120, max_depth=10)",
+    "regressor": "GradientBoostingRegressor(n_estimators=150, max_depth=4)",
+    "training_samples": 5000,
+    "seed": 42
+  }
+}

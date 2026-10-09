@@ -1,13 +1,20 @@
 import { DEMO_SESSIONS } from '../utils/demoData.js'
 
-// Single place where the frontend talks to the backend.
-// While the backend is not ready, keep USE_MOCK = true and everything still works.
-const USE_MOCK = true
-const BASE = '/api'
+// ──────────────────────────────────────────────────────────────────────────────
+// API client
+//
+// USE_MOCK = false  → all calls go to the real Express backend (port 5000)
+//                     which Vite proxies via /api → http://localhost:5000
+//
+// USE_MOCK = true   → in-memory / localStorage fallback (no backend needed)
+//
+// Switch to true if you need to demo without the backend running.
+// ──────────────────────────────────────────────────────────────────────────────
+const USE_MOCK = false
 
 async function request(path, options = {}) {
   const token = localStorage.getItem('token')
-  const res = await fetch(BASE + path, {
+  const res = await fetch('/api' + path, {
     headers: { 'Content-Type': 'application/json', ...(token && { Authorization: `Bearer ${token}` }) },
     ...options,
   })
@@ -18,15 +25,20 @@ async function request(path, options = {}) {
 const wait = (ms) => new Promise((r) => setTimeout(r, ms))
 
 export const api = {
+  // ── Authentication ─────────────────────────────────────────────────────────
   async login(username, password) {
     if (USE_MOCK) { await wait(300); return { token: 'mock', user: { name: username, role: 'trainee' } } }
     return request('/auth/login', { method: 'POST', body: JSON.stringify({ username, password }) })
   },
-  async saveScenario(config) {            // -> Scenario Engine
+
+  // ── Scenario setup ─────────────────────────────────────────────────────────
+  async saveScenario(config) {
     if (USE_MOCK) return { id: Date.now(), ...config }
     return request('/scenarios', { method: 'POST', body: JSON.stringify(config) })
   },
-  async analyze(session) {                // -> AI service (classification, threat score, recommendation)
+
+  // ── AI analysis (threat scoring + classification) ──────────────────────────
+  async analyze(session) {
     if (USE_MOCK) {
       await wait(900)
       const rows = session.drones.map((d) => {
@@ -40,25 +52,39 @@ export const api = {
     }
     return request('/analysis', { method: 'POST', body: JSON.stringify(session) })
   },
-    async saveResult(result) {
+
+  // ── Results / History ──────────────────────────────────────────────────────
+  async saveResult(result) {
     if (USE_MOCK) {
       const h = JSON.parse(localStorage.getItem('history') || '[]')
-      if (result.id && h.some((x) => x.id === result.id)) return result   // already saved
+      if (result.id && h.some((x) => x.id === result.id)) return result
       h.unshift(result)
       localStorage.setItem('history', JSON.stringify(h))
       return result
     }
     return request('/results', { method: 'POST', body: JSON.stringify(result) })
   },
-  async loadDemoData() {                  // mock-only: adds sample sessions
-    const h = JSON.parse(localStorage.getItem('history') || '[]').filter((x) => !x.demo)
-    localStorage.setItem('history', JSON.stringify([...h, ...DEMO_SESSIONS]))
-  },
-  async resetHistory() {                  // mock-only: clears everything
-    localStorage.removeItem('history')
-  },
+
   async getHistory() {
     if (USE_MOCK) return JSON.parse(localStorage.getItem('history') || '[]')
     return request('/results')
+  },
+
+  // ── Demo helpers ───────────────────────────────────────────────────────────
+  async loadDemoData() {
+    if (USE_MOCK) {
+      const h = JSON.parse(localStorage.getItem('history') || '[]').filter((x) => !x.demo)
+      localStorage.setItem('history', JSON.stringify([...h, ...DEMO_SESSIONS]))
+      return
+    }
+    return request('/demo/load', { method: 'POST' })
+  },
+
+  async resetHistory() {
+    if (USE_MOCK) {
+      localStorage.removeItem('history')
+      return
+    }
+    return request('/results', { method: 'DELETE' })
   },
 }

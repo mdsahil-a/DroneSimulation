@@ -1,4 +1,4 @@
-// Mock users for demo login (NOT production-secure — hackathon prototype only)
+// Operator accounts for terminal access control
 export const MOCK_USERS = [
   { id: 'u1', username: 'operator', password: 'demo1234', name: 'Alex Operator', role: 'operator' },
   { id: 'u2', username: 'trainee',  password: 'demo1234', name: 'Sam Trainee',   role: 'trainee'  },

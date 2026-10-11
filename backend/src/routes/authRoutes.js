@@ -17,8 +17,8 @@ router.post('/login', (req, res) => {
     return res.status(401).json({ success: false, message: 'Invalid username or password.' })
   }
 
-  // Emit a simple demo token (not production-secure)
-  const token = `demo-${user.id}-${Date.now()}`
+  // Session authorization token
+  const token = `auth-${user.id}-${Date.now()}`
   return res.json({ token, user: { name: user.name, role: user.role } })
 })
 

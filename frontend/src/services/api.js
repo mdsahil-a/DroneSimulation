@@ -1,15 +1,8 @@
 import { DEMO_SESSIONS } from '../utils/demoData.js'
 
-// ──────────────────────────────────────────────────────────────────────────────
-// API client
-//
-// USE_MOCK = false  → all calls go to the real Express backend (port 5000)
-//                     which Vite proxies via /api → http://localhost:5000
-//
-// USE_MOCK = true   → in-memory / localStorage fallback (no backend needed)
-//
-// Switch to true if you need to demo without the backend running.
-// ──────────────────────────────────────────────────────────────────────────────
+// API client configuration
+// USE_MOCK = false: Direct REST integration with surveillance backend
+// USE_MOCK = true:  Offline client storage fallback for standalone mode
 const USE_MOCK = false
 
 async function request(path, options = {}) {

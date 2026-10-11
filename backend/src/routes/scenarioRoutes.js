@@ -5,7 +5,7 @@ const router = Router()
 
 const VALID_DIFFICULTIES = ['Easy', 'Medium', 'Hard']
 const VALID_TIMES        = ['Day', 'Night']
-const VALID_TERRAINS     = ['Urban', 'Rural']
+const VALID_TERRAINS     = ['Urban', 'Rural', 'Border Perimeter']
 
 // POST /api/scenarios
 // Body: { difficulty, timeOfDay, terrain, droneCount, degradedSensors }

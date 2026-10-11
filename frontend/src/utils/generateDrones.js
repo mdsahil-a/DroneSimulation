@@ -1,4 +1,4 @@
-// Procedural generation: random drones each session so trainees cannot memorise.
+// Dynamic drone generation for training exercise scenarios
 const TYPES = ['Commercial', 'Surveillance', 'Armed', 'Swarm']
 let uid = 0
 export function generateDrones({ droneCount, difficulty }) {

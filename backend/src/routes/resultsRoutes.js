@@ -43,7 +43,7 @@ router.get('/:id', (req, res) => {
   res.json(generateReport(result))
 })
 
-// DELETE /api/results  — clear all results (mirrors resetHistory mock)
+// DELETE /api/results  — clear all stored session results
 router.delete('/', (req, res) => {
   resultsStore.length = 0
   res.json({ success: true, message: 'All results cleared.' })

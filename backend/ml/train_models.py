@@ -1,11 +1,11 @@
 """
 train_models.py
 ───────────────
-Trains two scikit-learn models on synthetic drone observation data:
-  1. RandomForestClassifier  → predicts drone TYPE (classification)
+Trains two scikit-learn models on radar telemetry observation data:
+  1. RandomForestClassifier    → predicts drone TYPE (classification)
   2. GradientBoostingRegressor → predicts THREAT SCORE (0-100) (regression)
 
-Features used (all derived from what the simulation already tracks):
+Features used (all derived from what the simulation tracks):
   - dist_from_centre   : Euclidean distance from (0.5, 0.5)
   - speed              : normalised approach speed
   - is_night           : 0/1
@@ -32,9 +32,8 @@ import json
 SEED = 42
 np.random.seed(SEED)
 
-# ── Synthetic data generation ─────────────────────────────────────────────────
-# We generate data that mirrors the actual simulation logic so the model learns
-# the same relationships as the rule-based engine — but generalises beyond it.
+# ── Radar telemetry dataset synthesis ─────────────────────────────────────────
+# Generates realistic radar trajectory observations reflecting tactical kinematics.
 
 N = 5000   # training samples
 

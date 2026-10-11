@@ -1,6 +1,5 @@
-// In-memory store for simulation results (history).
-// Data is lost when the server restarts — by design for this MVP.
+// In-memory store for simulation results and telemetry history
 export const resultsStore = []
 
-// In-memory store for scenarios created via API
+// In-memory store for configured scenarios
 export const scenariosStore = []

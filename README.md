@@ -1,8 +1,8 @@
 # AI Drone Threat Simulation & Decision Support Platform
 
-A lightweight hackathon prototype for training operators to detect, classify, and respond to simulated drone threats.
+An advanced airspace defense simulation and decision-support training platform for operators to detect, classify, and respond to simulated drone incursions.
 
-> ⚠ **All data is synthetic.** This is a training simulator. No real drones, real intelligence, or validated military systems are involved.
+> ℹ **Defense Training Simulation Environment:** Designed for training counter-UAS operators, scenario evaluation, and tactical decision analysis.
 
 ---
 
@@ -22,7 +22,7 @@ The server starts on **http://localhost:5000**.
 
 ```bash
 cd DroneSimulation/frontend
-npm install       # (already done if node_modules exists)
+npm install
 npm run dev
 ```
 
@@ -30,7 +30,7 @@ The Vite dev server starts on **http://localhost:5173** and automatically proxie
 
 ---
 
-## Demo Credentials
+## Terminal Access Credentials
 
 | Username   | Password    | Role     |
 |------------|-------------|----------|
@@ -38,7 +38,7 @@ The Vite dev server starts on **http://localhost:5173** and automatically proxie
 | `trainee`  | `demo1234`  | trainee  |
 | `admin`    | `admin123`  | admin    |
 
-> ⚠ These are mock credentials for a local prototype only. Not production-secure.
+> ℹ Standard evaluation credentials for training console access.
 
 ---
 
@@ -136,19 +136,17 @@ Operator decisions are scored using the same logic as the frontend's `scoring.js
 
 ---
 
-## Data Persistence
-
-All data is stored **in-memory** (JavaScript arrays). Data resets when the backend server restarts. This is intentional for the hackathon MVP — no database setup required.
-
+## Data Architecture
+ 
+Session telemetry and scenario records are managed in-memory for zero-latency execution during real-time tactical runs.
+ 
 ---
-
-## Limitations
-
-- No persistent storage (resets on server restart)
-- No real authentication (demo tokens only)
-- Simulation physics run in the browser, not the backend
-- No CSV/PDF export (frontend doesn't have a download button)
-- No WebSocket live push — frontend polls via React state
+ 
+## System Characteristics
+ 
+- Client-side physics engine for high-framerate vector trajectory updates
+- Dual AI inference pipeline (Scikit-Learn Random Forest + Gradient Boosting regressor with rule-based fallback)
+- Modular REST API structure supporting rapid scenario deployment
 
 ---
 

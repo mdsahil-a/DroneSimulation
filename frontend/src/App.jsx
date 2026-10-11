@@ -13,7 +13,7 @@ const guard = (el) => <ProtectedRoute>{el}</ProtectedRoute>
 
 export default function App() {
   return (
-    <>
+    <div className="min-h-screen bg-[#07080B] text-slate-100 font-sans selection:bg-red-500/30 selection:text-white">
       <Navbar />
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -25,6 +25,6 @@ export default function App() {
         <Route path="/history" element={guard(<History />)} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
-    </>
+    </div>
   )
 }

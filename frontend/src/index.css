@@ -1,8 +1,175 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body { @apply bg-ink text-sand font-sans; }
-.btn { @apply rounded px-4 py-2 font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber; }
-.btn-primary { @apply btn bg-amber text-white hover:brightness-110; }
-.btn-ghost { @apply btn border border-line hover:bg-line; }
-.input { @apply w-full rounded border border-line bg-ink px-3 py-2 focus:outline-none focus:border-amber; }
+
+@layer base {
+  body {
+    background-color: #07080B;
+    color: #F1F5F9;
+    font-family: 'Rajdhani', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* ── Custom sleek dark scrollbar ────────────────────────────────────────── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #07080B; }
+  ::-webkit-scrollbar-thumb { background-color: #1F2533; border-radius: 9999px; }
+  ::-webkit-scrollbar-thumb:hover { background-color: #FF2A3A; }
+}
+
+@layer components {
+  /* ── Buttons ───────────────────────────────────────────────────────────── */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-semibold
+           transition-all duration-150 focus-visible:outline focus-visible:outline-2
+           focus-visible:outline-red-500 focus-visible:outline-offset-2
+           disabled:opacity-40 disabled:cursor-not-allowed select-none;
+  }
+  
+  /* Primary tactical red button */
+  .btn-primary {
+    @apply btn bg-[#FF2A3A] text-white hover:bg-[#E02433] active:scale-[0.98] shadow-[0_0_15px_rgba(255,42,58,0.35)];
+  }
+  
+  /* Dark outline button */
+  .btn-secondary {
+    @apply btn bg-[#121620] border border-white/[0.12] text-slate-200 hover:bg-[#1A202E] hover:text-white hover:border-white/[0.2] active:scale-[0.98] shadow-sm;
+  }
+
+  .btn-ghost {
+    @apply btn border border-white/[0.08] text-slate-400 hover:border-white/[0.2] hover:text-white
+           hover:bg-white/[0.04] active:scale-[0.98];
+  }
+
+  .btn-danger {
+    @apply btn border border-red-500/40 text-red-400 bg-red-500/15 hover:bg-red-500/25 active:scale-[0.98];
+  }
+
+  .btn-info {
+    @apply btn bg-blue-500/15 text-blue-400 border border-blue-500/30 hover:bg-blue-500/25 active:scale-[0.98];
+  }
+
+  .btn-sm { @apply px-2.5 py-1.5 text-xs; }
+  .btn-icon { @apply btn p-2 rounded-lg; }
+
+  /* ── Inputs & Selects ──────────────────────────────────────────────────── */
+  .input {
+    @apply w-full rounded-lg border border-white/[0.1] bg-[#10131B] px-3 py-2 text-sm text-slate-100
+           placeholder:text-slate-500 focus:outline-none focus:border-[#FF2A3A]
+           focus:ring-2 focus:ring-[#FF2A3A]/20 transition-all shadow-sm;
+  }
+  
+  .select {
+    @apply input appearance-none cursor-pointer pr-8 bg-no-repeat;
+  }
+
+  /* ── Cards / Panels ───────────────────────────────────────────────────── */
+  .card {
+    @apply rounded-2xl border border-white/[0.08] bg-[#0E1118]/95 backdrop-blur-md shadow-[0_4px_24px_rgba(0,0,0,0.6)] transition-all;
+  }
+  
+  .card:hover {
+    @apply border-white/[0.12] shadow-[0_6px_28px_rgba(0,0,0,0.8)];
+  }
+
+  .card-header {
+    @apply flex items-center justify-between px-6 py-4 border-b border-white/[0.08];
+  }
+  
+  .card-body { @apply p-6; }
+
+  /* ── Status badges ─────────────────────────────────────────────────────── */
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-bold tracking-wide;
+  }
+  
+  .badge-high {
+    @apply badge bg-red-500/15 text-red-400 border border-red-500/30;
+  }
+  
+  .badge-medium {
+    @apply badge bg-amber-500/15 text-amber-400 border border-amber-500/30;
+  }
+  
+  .badge-low {
+    @apply badge bg-emerald-500/15 text-emerald-400 border border-emerald-500/30;
+  }
+  
+  .badge-purple {
+    @apply badge bg-purple-500/15 text-purple-300 border border-purple-500/30;
+  }
+  
+  .badge-info {
+    @apply badge bg-blue-500/15 text-blue-400 border border-blue-500/30;
+  }
+  
+  .badge-dim {
+    @apply badge bg-white/[0.06] text-slate-400 border border-white/[0.08];
+  }
+
+  /* Filter pill active vs inactive */
+  .filter-pill {
+    @apply px-3.5 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all cursor-pointer select-none;
+  }
+  .filter-pill-active {
+    @apply filter-pill bg-[#FF2A3A] text-white shadow-[0_0_12px_rgba(255,42,58,0.35)];
+  }
+  .filter-pill-inactive {
+    @apply filter-pill bg-[#121620] text-slate-400 border border-white/[0.08] hover:bg-[#1A202E] hover:text-white;
+  }
+
+  /* ── Data Table ────────────────────────────────────────────────────────── */
+  .data-table { @apply w-full text-sm text-left; }
+  .data-table thead tr { @apply border-b border-white/[0.08] bg-[#121520]; }
+  .data-table thead th { @apply py-3 px-4 text-xs font-bold text-slate-400 uppercase tracking-wider; }
+  .data-table tbody tr { @apply border-b border-white/[0.05] hover:bg-white/[0.03] transition-colors; }
+  .data-table tbody td { @apply py-3.5 px-4 text-slate-300; }
+  .data-table tbody tr:last-child { @apply border-b-0; }
+
+  /* ── Stat display ──────────────────────────────────────────────────────── */
+  .stat-value { @apply text-2xl sm:text-3xl font-extrabold text-white tracking-tight; }
+  .stat-label { @apply text-xs font-bold text-slate-400 uppercase tracking-wider mt-1; }
+
+  /* ── Layout wrappers ───────────────────────────────────────────────────── */
+  .page { @apply max-w-7xl mx-auto space-y-6; }
+}
+
+/* ── Radar Sweep Keyframes ────────────────────────────────────────────────── */
+@keyframes radar-sweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-radar-sweep {
+  animation: radar-sweep 4s linear infinite;
+  transform-origin: 500px 500px;
+}
+
+.radar-paused .animate-radar-sweep {
+  animation-play-state: paused;
+}
+
+/* ── Glowing Signal Waveform Pulse ────────────────────────────────────────── */
+@keyframes signal-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px rgba(255, 42, 58, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(255, 42, 58, 0.8));
+  }
+}
+
+.animate-signal-glow {
+  animation: signal-glow 2.5s ease-in-out infinite;
+}

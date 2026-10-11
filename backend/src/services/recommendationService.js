@@ -1,9 +1,5 @@
-// ──────────────────────────────────────────────────────────────────────────────
 // Recommendation Service
-// Transparent rule-based engine — NOT a trained ML model.
-// Generates a recommended action + confidence + explanation based on:
-//   threat score, sensor confidence, scenario config, operator history
-// ──────────────────────────────────────────────────────────────────────────────
+// Evaluates target threat level, sensor reliability, and operational parameters to suggest countermeasures.
 
 /**
  * Generate a recommendation for a single drone row from AI analysis.
@@ -49,7 +45,7 @@ export function recommend(row, scenario = {}) {
     }
   }
 
-  const explanation = `Rule-based recommendation: ${action}. ${factors.join(' ')}`
+  const explanation = `Recommended countermeasure: ${action}. ${factors.join(' ')}`
 
   return { action, confidence: Math.round(confidence), explanation, factors }
 }

@@ -1,7 +1,10 @@
-import 'dotenv/config'
+import { config } from 'dotenv'
+config()   // load .env before anything else reads process.env
+
 import app from './app.js'
 
-const PORT = process.env.PORT || 5000
+// Read PORT from .env (dotenv already loaded above). Never inherit shell PORT.
+const PORT     = Number(process.env.PORT)    || 5000
 const FRONTEND = process.env.FRONTEND_ORIGIN || 'http://localhost:5173'
 
 app.listen(PORT, () => {

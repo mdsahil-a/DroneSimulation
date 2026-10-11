@@ -1,4 +1,4 @@
-// Decision-tree style scoring: judges ask for this to be explicit.
+// Tactical decision matrix for counter-UAS evaluation
 export const correctAction = (drone) => (drone.hostile ? (drone.type === 'Swarm' ? 'Engage' : 'Jam') : 'Monitor')
 
 export function scoreDecision(drone, decision) {

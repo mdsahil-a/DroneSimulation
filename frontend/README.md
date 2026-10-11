@@ -1,7 +1,12 @@
-# Drone Threat Trainer - Frontend (React + Tailwind)
+# Drone Threat Trainer - Tactical Frontend
 
-    npm install
-    npm run dev
+Tactical surveillance console and simulation interface built with React and Tailwind CSS.
 
-Backend hookup: open `src/services/api.js`, set `USE_MOCK = false`, and agree on the endpoints
-(`/api/auth/login`, `/api/scenarios`, `/api/analysis`, `/api/results`) with your teammate.
+## Getting Started
+
+```bash
+npm install
+npm run dev
+```
+
+The console connects to the surveillance API at `http://localhost:5000` via Vite proxy (`/api`).
